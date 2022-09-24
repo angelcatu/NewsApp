@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base button -->
+    <string name="txt_login">Ingresar</string>
+
+    <!-- Input Text -->
+    <string name="txt_email_text_hint">Correo electrónico</string>
+    <string name="txt_password_text_hint">Contraseña</string>
+</resources>
