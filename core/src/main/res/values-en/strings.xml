@@ -6,4 +6,8 @@
     <!-- Input Text -->
     <string name="txt_email_text_hint">E-mail</string>
     <string name="txt_password_text_hint">Password</string>
+
+    <!-- Login fragmeent -->
+    <string name="txt_you_dont_have_account">You don\'t have an account?</string>
+    <string name="txt_sign_in"> Sign up</string>
 </resources>
