@@ -5,6 +5,7 @@ plugins {
 
 apply from: rootProject.file("Configuration/dependencies.gradle")
 apply from: rootProject.file("Configuration/library.gradle")
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdk 33

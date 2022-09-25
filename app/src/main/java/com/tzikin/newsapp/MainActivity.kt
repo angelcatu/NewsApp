@@ -13,8 +13,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        FirebaseApp.initializeApp(this)
-
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.activity_main, null, false)
         binding.also { it.lifecycleOwner = this }
         setContentView(binding.root)

@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:233742279588:android:c12fb848a73aee45371731",
+        "mobilesdk_app_id": "1:233742279588:android:20b67aba785ccceb371731",
         "android_client_info": {
-          "package_name": "com.tzikin.newsapp"
+          "package_name": "com.tzikin.newsapp.dev"
         }
       },
       "oauth_client": [
         {
-          "client_id": "233742279588-59vp2lnnc5vd4sricuobc8cmbm5bjdt6.apps.googleusercontent.com",
+          "client_id": "233742279588-fpqhfq6a0cpueaku961pqi0fbmdqlts5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.tzikin.newsapp",
+            "package_name": "com.tzikin.newsapp.dev",
             "certificate_hash": "f8b8fc0a569ce36023e4958ee9967b1f45a65c6a"
           }
         },
