@@ -4,11 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.FirebaseApp
+import com.tzikin.core.common.ProgressBar
+import com.tzikin.core.ui.AppFunctions
 import com.tzikin.newsapp.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AppFunctions {
 
     lateinit var binding: ActivityMainBinding
+
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,5 +20,14 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.activity_main, null, false)
         binding.also { it.lifecycleOwner = this }
         setContentView(binding.root)
+    }
+
+    override fun showProgressBar() {
+        progressBar = ProgressBar()
+        progressBar.show(supportFragmentManager, "MyProgressBar")
+    }
+
+    override fun hideProgressBar() {
+        progressBar.dismiss()
     }
 }

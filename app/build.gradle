@@ -60,6 +60,7 @@ dependencies {
 
     implementation project(":core")
     implementation project(":login")
+    implementation project(":home")
 
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.6.1'

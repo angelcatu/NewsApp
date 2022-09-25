@@ -7,4 +7,9 @@
         <item name="hintTextColor">@color/blue_primary</item>
         <item name="errorEnabled">true</item>
     </style>
+
+    <style name="ProgressBarDialogStyle">
+        <item name="android:windowBackground">@drawable/bg_progress_bar
+        </item>
+    </style>
 </resources>

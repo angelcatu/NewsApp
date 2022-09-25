@@ -1,11 +1,9 @@
 package com.tzikin.core.repository.login
 
 import androidx.lifecycle.MutableLiveData
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.tzikin.core.helpers.RequestState
 
 /**
  * @author Angel Elias on 24/09/22.
@@ -13,25 +11,35 @@ import com.google.firebase.auth.FirebaseUser
  **/
 class AuthAppRepository {
 
-    var userLiveData: MutableLiveData<FirebaseUser> = MutableLiveData()
+    private var userLiveData: MutableLiveData<FirebaseUser?> = MutableLiveData()
 
-    lateinit var firebaseAuth: FirebaseAuth
-
-    init {
-        firebaseAuth = FirebaseAuth.getInstance()
+    private val firebaseAuth: FirebaseAuth by lazy {
+        FirebaseAuth.getInstance()
     }
 
 
     fun registerUser(email: String, password: String) {
 
         firebaseAuth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(object : OnCompleteListener<AuthResult> {
-                override fun onComplete(task: Task<AuthResult>) {
-                    if (task.isSuccessful) {
-                        userLiveData.postValue(firebaseAuth.currentUser)
-                    }
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    userLiveData.postValue(firebaseAuth.currentUser)
+                } else {
                 }
+            }
+    }
 
-            })
+    fun login(email: String, password: String): MutableLiveData<RequestState<FirebaseUser?>> {
+        val requestState = MutableLiveData<RequestState<FirebaseUser?>>()
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    requestState.value = RequestState.Success(userLiveData.value)
+                }
+            }.addOnFailureListener {
+                requestState.value = RequestState.Error("User not found!")
+            }
+
+        return requestState
     }
 }

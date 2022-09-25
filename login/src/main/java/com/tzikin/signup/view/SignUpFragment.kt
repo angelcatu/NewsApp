@@ -2,7 +2,6 @@ package com.tzikin.signup.view
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import com.tzikin.core.BaseFragment
@@ -34,20 +33,22 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
 
             if(viewModel.allValuesCorrect.value == true){
                 viewModel.registerUser()
+
+                navigateTo(R.id.action_signUpFragment_to_loginFragment)
             }
         }
     }
 
     private fun gettingInputValues() {
-        binding.emailText.getEmailInput().doOnTextChanged { text, start, before, count ->
+        binding.emailText.getEmailInput().doOnTextChanged { text, _, _, _ ->
             viewModel.setEmail(text.toString())
         }
 
-        binding.passwordText.getPasswordInput().doOnTextChanged { text, start, before, count ->
+        binding.passwordText.getPasswordInput().doOnTextChanged { text, _, _, _ ->
             viewModel.setPassword(text.toString())
         }
 
-        binding.confirmationPasswordText.getPasswordInput().doOnTextChanged { text, start, before, count ->
+        binding.confirmationPasswordText.getPasswordInput().doOnTextChanged { text, _, _, _ ->
             viewModel.setConfirmationPassword(text.toString())
         }
     }

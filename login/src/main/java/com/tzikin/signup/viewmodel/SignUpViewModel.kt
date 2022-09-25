@@ -2,28 +2,24 @@ package com.tzikin.signup.viewmodel
 
 import android.app.Application
 import android.util.Patterns
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.google.firebase.auth.FirebaseUser
 import com.tzikin.core.repository.login.AuthAppRepository
 import com.tzikin.login.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SignUpViewModel(application: Application) : AndroidViewModel(application) {
 
 
-    private lateinit var authAppRepository: AuthAppRepository
-    private lateinit var userLiveData: MutableLiveData<FirebaseUser>
+    private var authAppRepository: AuthAppRepository = AuthAppRepository()
 
 
-    init {
-        authAppRepository = AuthAppRepository()
-        userLiveData = authAppRepository.userLiveData
-    }
 
     fun registerUser(){
-        authAppRepository.registerUser(email = email.value.toString(), password = password.value.toString())
+        viewModelScope.launch {
+            authAppRepository.registerUser(email = email.value.toString(), password = password.value.toString())
+        }
     }
 
 
