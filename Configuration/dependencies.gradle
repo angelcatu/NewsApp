@@ -27,4 +27,8 @@ dependencies {
     // Jetpack Compose Integration
     implementation "androidx.navigation:navigation-compose:$nav_version"
 
+    // FIREBASE
+    // Firebase authentication
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.8'
+
 }

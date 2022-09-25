@@ -21,8 +21,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
 
         binding.loginButton.onClickListener {
-            Toast.makeText(context, "HOla mundo", Toast.LENGTH_LONG).show()
+
         }
 
+        binding.txtSignUp.setOnClickListener{
+            navigateTo(R.id.action_loginFragment_to_signUpFragment)
+        }
     }
 }

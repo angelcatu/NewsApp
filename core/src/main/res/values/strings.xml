@@ -10,4 +10,10 @@
     <!-- Login fragmeent -->
     <string name="txt_you_dont_have_account">¿No tienes cuenta?</string>
     <string name="txt_sign_in"> Regístrate</string>
+
+    <!-- Signup fragment -->
+    <string name="txt_continue_user">Continuar</string>
+    <string name="txt_email_error">Correo invalido</string>
+    <string name="txt_password_doesnt_match">La contraseña no coincide</string>
+    <string name="txt_password_must_be_6_characters">La contraseña debe tener más de 6 caracteres</string>
 </resources>

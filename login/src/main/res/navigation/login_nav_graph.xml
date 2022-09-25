@@ -9,5 +9,14 @@
         android:id="@+id/loginFragment"
         android:name="com.tzikin.login.view.LoginFragment"
         tools:layout="@layout/fragment_login"
-        android:label="LoginFragment" />
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.tzikin.signup.view.SignUpFragment"
+        tools:layout="@layout/fragment_sign_up"
+        android:label="SignUpFragment" />
 </navigation>

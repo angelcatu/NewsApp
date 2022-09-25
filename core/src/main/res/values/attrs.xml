@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="inputText">
+
+    </declare-styleable>
+
+    <declare-styleable name="baseButton">
+        <attr name="text" value="string" />
+    </declare-styleable>
+</resources>

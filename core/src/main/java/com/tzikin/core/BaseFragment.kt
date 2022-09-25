@@ -17,7 +17,7 @@ import androidx.navigation.findNavController
 abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
 
     lateinit var binding: T
-    private var navController: NavController? = null
+    private lateinit var navController: NavController
 
 
     abstract val layoutId: Int
@@ -44,12 +44,10 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController.let {
-            view.findNavController()
-        }
+        navController = view.findNavController()
     }
 
     protected fun navigateTo(idDestination: Int) {
-        navController?.navigate(idDestination)
+        navController.navigate(idDestination)
     }
 }

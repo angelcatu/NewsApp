@@ -18,22 +18,42 @@ class BaseButton : ConstraintLayout {
     constructor(context: Context) : super(context)
 
 
-    constructor(context: Context, attribute: AttributeSet) : super(context, attribute)
+    constructor(context: Context, attribute: AttributeSet) : super(context, attribute){
+        init(context, attribute)
+    }
 
 
     constructor(context: Context, attribute: AttributeSet, defStyleAttr: Int) : super(
         context,
         attribute,
         defStyleAttr
-    )
-
-    init {
-        addView(binding.root)
+    ){
+        init(context, attribute)
     }
 
     fun onClickListener(onClickListener: () -> Unit) {
         binding.baseButton.setOnClickListener { onClickListener.invoke() }
     }
 
+    fun setText(value: String){
+        binding.baseButton.text = value
+    }
+
+    private fun init(context: Context, attribute: AttributeSet) {
+        addView(binding.root)
+
+        val attrs = context.theme.obtainStyledAttributes(
+            attribute,
+            com.tzikin.core.R.styleable.baseButton,
+            0, 0
+        )
+        val arryRefR = attrs.getString(com.tzikin.core.R.styleable.baseButton_text)
+
+        if(!arryRefR.isNullOrEmpty()){
+            setText(arryRefR)
+        }
+
+        attrs.recycle()
+    }
 
 }
