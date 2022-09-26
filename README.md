@@ -21,7 +21,7 @@ The application is composed of
 ### Module presentation
  Custom components such as buttons and text boxes are built in this module.
 
-### Module logi
+### Module login
  The login module manages the navigation and design of the login and user registration, here it connects to Firebase Auth to create and make requests.
 
 ### Module home
