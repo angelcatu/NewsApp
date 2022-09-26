@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(), AppFunctions {
 
     override fun showProgressBar() {
 
-        // binding.animatedIcon.visibility = View.VISIBLE
+         binding.animatedIcon.visibility = View.VISIBLE
 
         /*
         progressBar = ProgressBar()
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(), AppFunctions {
     }
 
     override fun hideProgressBar() {
-       // binding.animatedIcon.visibility = View.GONE
+        binding.animatedIcon.visibility = View.GONE
         //progressBar.dismiss()
     }
 }

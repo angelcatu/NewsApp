@@ -17,18 +17,19 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
 
     var homeRepository: HomeRepository = HomeRepository()
     private var _requestState: MutableLiveData<RequestState<NewsResponse>> = MutableLiveData()
-    val requestState: MutableLiveData<RequestState<NewsResponse>> = _requestState
+    val requestState: MutableLiveData<RequestState<NewsResponse>>
+        get() = _requestState
 
 
     private var _articles: MutableLiveData<MutableList<Articles>> = MutableLiveData()
-    val articles: LiveData<MutableList<Articles>> = _articles
+    val articles: LiveData<MutableList<Articles>>
+        get() = _articles
 
     fun getNews(topic: String, startDate: String, endDate: String) {
 
         viewModelScope.launch {
             try {
                 _requestState.value = RequestState.loading
-                var request = homeRepository.getAllNews(topic, startDate, endDate)
                 handleResponseStatus(homeRepository.getAllNews(topic, startDate, endDate))
 
             }catch (e: Exception) {

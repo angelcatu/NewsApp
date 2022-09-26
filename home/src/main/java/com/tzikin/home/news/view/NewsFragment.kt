@@ -32,29 +32,28 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>() {
     }
 
     private fun bindUIService() {
+        viewModel.getNews("android", "2022-09-25", "2022-09-25")
         viewModel.apply {
-
-
-                getNews("android", "2022-09-24", "2022-09-24")
                 requestState.observe(requireActivity()) {
                     when (it) {
                         is RequestState.loading -> {
-                         //   showProgressBar()
+                            //showProgressBar()
                         }
 
                         is RequestState.Success -> {
-                           // dismissProgressBar()
+
 
                             viewModel.setArticles(it.value.articles)
                             adapter.dataHasChanged(it.value.articles)
 
                             binding.recyclerView.adapter = adapter
-
+                            //dismissProgressBar()
                         }
 
                         is RequestState.Error -> {
-                          //  dismissProgressBar()
+
                             requireActivity().toast(it.message)
+                            //dismissProgressBar()
                         }
                     }
                 }
