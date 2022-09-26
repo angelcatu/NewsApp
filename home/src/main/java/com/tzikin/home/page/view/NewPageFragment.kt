@@ -55,7 +55,7 @@ class NewPageFragment : BaseFragment<FragmentNewPageLayoutBinding>() {
 
         binding.txtPageSource.text = article?.source?.name
         binding.txtPageDescription.text = article?.description
-        Picasso.get().load(article?.urlToImage).into(binding.imgPageNew)
+        Picasso.get().load(article?.urlToImage).resize(350, 150) .into(binding.imgPageNew)
     }
 
 }

@@ -20,5 +20,6 @@
 
     <!-- new fragment -->
     <string name="for_more_information">Par más información presione aquí</string>
+    <string name="txt_today_news">Noticias de hoy</string>
 
 </resources>

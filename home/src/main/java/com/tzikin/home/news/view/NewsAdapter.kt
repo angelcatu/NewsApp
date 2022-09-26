@@ -44,7 +44,8 @@ class NewsAdapter(private var newsList: MutableList<Articles> = mutableListOf(),
             val result = formatted?.let { finalFormat.format(it) }
             binding.txtDate.text = result
 
-            Picasso.get().load(article.urlToImage).into(binding.imgNew)
+            Picasso.get().load(article.urlToImage).resize(350, 180).centerCrop()
+                .into(binding.imgNew)
 
             binding.arrow.setOnClickListener{
                 onClickListener.invoke(layoutPosition)
