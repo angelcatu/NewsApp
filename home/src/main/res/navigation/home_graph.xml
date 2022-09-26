@@ -12,6 +12,36 @@
         android:label="NewsFragment" >
 
         <deepLink app:uri="android-app://com.tzikin.home.news.view/NewsFragment"/>
+        <action
+            android:id="@+id/action_newsFragment_to_newPageFragment"
+            app:destination="@id/newPageFragment" />
 
     </fragment>
+    <fragment
+        android:id="@+id/newPageFragment"
+        android:name="com.tzikin.home.page.view.NewPageFragment"
+        tools:layout="@layout/fragment_new_page_layout"
+        android:label="NewPageFragment" >
+
+
+        <argument
+            android:name="newsId"
+            app:argType="integer"
+            android:defaultValue="0"/>
+        <action
+            android:id="@+id/action_newPageFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.tzikin.home.page.view.WebViewFragment"
+        tools:layout="@layout/fragment_web_view"
+        android:label="WebViewFragment" >
+        <argument
+            android:name="newURL"
+            app:argType="string" />
+    </fragment>
+
+
 </navigation>

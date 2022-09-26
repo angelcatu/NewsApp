@@ -34,7 +34,6 @@ dependencies {
     // Lottie
     implementation 'com.airbnb.android:lottie:4.2.1'
 
-
     // REtrofit
 
     implementation 'com.google.code.gson:gson:2.9.0'

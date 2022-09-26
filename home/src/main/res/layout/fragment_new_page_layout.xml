@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".page.view.NewPageFragment">
+
+
+            <ImageView
+                android:id="@+id/imgPageNew"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/txtPageTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:text="TextView"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgPageNew" />
+
+            <TextView
+                android:id="@+id/txtPageDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/txtPageTitle"
+                app:layout_constraintStart_toStartOf="@+id/txtPageTitle"
+                app:layout_constraintTop_toBottomOf="@+id/txtPageTitle" />
+
+            <TextView
+                android:id="@+id/txtPageContent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="82dp"
+                android:textStyle="normal"
+                android:textSize="15sp"
+                android:text=""
+                android:textColor="@color/black"
+                android:inputType="textMultiLine"
+                android:singleLine="false"
+                app:layout_constraintEnd_toEndOf="@+id/txtPageDescription"
+                app:layout_constraintStart_toStartOf="@+id/txtPageDescription"
+                app:layout_constraintTop_toBottomOf="@+id/txtPageDescription" />
+
+            <TextView
+                android:id="@+id/txtPageSource"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="TextView"
+                android:textSize="12sp"
+                android:textColor="@color/gray_1"
+                android:gravity="end"
+                app:layout_constraintBottom_toTopOf="@+id/txtPageContent"
+                app:layout_constraintEnd_toEndOf="@+id/txtPageContent" />
+
+            <TextView
+                android:id="@+id/txtPageDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="TextView"
+                android:textSize="12sp"
+                android:textColor="@color/gray_1"
+                android:gravity="end"
+                app:layout_constraintBottom_toTopOf="@+id/txtPageContent"
+                app:layout_constraintStart_toStartOf="@+id/txtPageContent" />
+
+            <TextView
+                android:id="@+id/txtPageMoreInformation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/for_more_information"
+                android:textSize="15sp"
+                android:textColor="@color/blue_primary"
+                android:gravity="end"
+                app:layout_constraintStart_toStartOf="@+id/txtPageDescription"
+                app:layout_constraintTop_toBottomOf="@+id/txtPageDescription" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+</layout>

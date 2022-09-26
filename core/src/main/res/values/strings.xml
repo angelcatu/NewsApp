@@ -16,4 +16,9 @@
     <string name="txt_email_error">Correo invalido</string>
     <string name="txt_password_doesnt_match">La contraseña no coincide</string>
     <string name="txt_password_must_be_6_characters">La contraseña debe tener más de 6 caracteres</string>
+
+
+    <!-- new fragment -->
+    <string name="for_more_information">Par más información presione aquí</string>
+
 </resources>

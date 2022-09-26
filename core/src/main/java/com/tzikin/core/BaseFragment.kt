@@ -11,6 +11,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.tzikin.core.ui.AppFunctions
@@ -64,6 +65,12 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
             findNavController().navigate(request)
         } catch (e: Exception) {
             Log.d("Navigation exception: ", e.message.toString())
+        }
+    }
+
+    protected fun navigateTo(action: NavDirections) {
+        if (::navController.isInitialized) {
+            navController.navigate(action)
         }
     }
 

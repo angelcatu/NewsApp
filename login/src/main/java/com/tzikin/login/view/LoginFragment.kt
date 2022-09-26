@@ -1,19 +1,18 @@
 package com.tzikin.login.view
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.tzikin.core.BaseFragment
 import com.tzikin.core.common.ConstantsDeepLink
+import com.tzikin.core.common.toast
 import com.tzikin.core.helpers.RequestState
+import com.tzikin.home.news.viewmodel.NewsViewModel
 import com.tzikin.login.R
 import com.tzikin.login.databinding.FragmentLoginBinding
 import com.tzikin.login.viewmodel.LoginViewModel
-import com.tzikin.core.common.toast
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
@@ -21,6 +20,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         get() = R.layout.fragment_login
 
     private val viewModel: LoginViewModel by viewModels()
+    private val homeViewModel: NewsViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,13 +28,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
         binding.loginButton.onClickListener {
             viewModel.login()
-            viewModel.requestState.observe(requireActivity()){
-                when(it){
+            viewModel.requestState.observe(requireActivity()) {
+                when (it) {
                     is RequestState.loading -> {
 
                     }
 
                     is RequestState.Success -> {
+                        homeViewModel.setArticles(mutableListOf())
                         navigateTo(ConstantsDeepLink.HOME_PAGE_DEEP_LINK)
                     }
 
@@ -45,7 +46,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             }
         }
 
-        binding.txtSignUp.setOnClickListener{
+        binding.txtSignUp.setOnClickListener {
             navigateTo(R.id.action_loginFragment_to_signUpFragment)
         }
 

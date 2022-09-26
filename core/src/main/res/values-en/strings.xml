@@ -16,4 +16,7 @@
     <string name="txt_email_error">Invalid e-mail</string>
     <string name="txt_password_doesnt_match">The password does not match</string>
     <string name="txt_password_must_be_6_characters">Password must be 6 or more characters</string>
+
+    <!-- new fragment -->
+    <string name="for_more_information">For more information press here</string>
 </resources>

@@ -9,6 +9,7 @@ import com.google.android.gms.common.api.Api
 import com.tzikin.core.helpers.ApiHandleResult
 import com.tzikin.core.helpers.RequestState
 import com.tzikin.core.repository.home.HomeRepository
+import com.tzikin.core.repository.home.model.Articles
 import com.tzikin.core.repository.home.model.NewsResponse
 import kotlinx.coroutines.launch
 
@@ -16,7 +17,10 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
 
     var homeRepository: HomeRepository = HomeRepository()
     private var _requestState: MutableLiveData<RequestState<NewsResponse>> = MutableLiveData()
-    val requestState: LiveData<RequestState<NewsResponse>> = _requestState
+    val requestState: MutableLiveData<RequestState<NewsResponse>> = _requestState
+
+    private var _articles: MutableLiveData<MutableList<Articles>> = MutableLiveData()
+    val articles: LiveData<MutableList<Articles>> = _articles
 
     fun getNews(topic: String, startDate: String, endDate: String) {
 
@@ -36,4 +40,7 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
         _requestState.value = requestState
     }
 
+    fun setArticles(value: MutableList<Articles>){
+        _articles.value = value
+    }
 }

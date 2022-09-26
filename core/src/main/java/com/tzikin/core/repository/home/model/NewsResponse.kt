@@ -9,13 +9,6 @@ data class NewsResponse(
     val totalResults: Int,
     val articles: MutableList<Articles>
 )
-
-data class Response(
-    val status: String,
-    val totalResults: Int,
-    val articles: List<Articles>
-)
-
 data class Articles(
     val source: Source,
     val author: String,

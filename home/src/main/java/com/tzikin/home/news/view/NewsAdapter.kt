@@ -13,7 +13,7 @@ import com.tzikin.home.databinding.NewsListLayoutBinding
  * @author Angel Elias on 25/09/22.
  * Copyright (c) 2022 NewsApp . All rights reserved.
  **/
-class NewsAdapter(private var newsList: MutableList<Articles> = mutableListOf(), private val onClickListener: (Articles) -> Unit): RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
+class NewsAdapter(private var newsList: MutableList<Articles> = mutableListOf(), private val onClickListener: (Int) -> Unit): RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = NewsListLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -28,7 +28,7 @@ class NewsAdapter(private var newsList: MutableList<Articles> = mutableListOf(),
 
     class ViewHolder(var binding: NewsListLayoutBinding) : RecyclerView.ViewHolder(binding.root){
 
-        fun bind(article: Articles, onClickListener: (Articles) -> Unit) {
+        fun bind(article: Articles, onClickListener: (Int) -> Unit) {
             binding.txtTitle.text = article.title
             binding.txtDescription.text = article.description
             binding.txtAuthor.text = article.author
@@ -37,7 +37,7 @@ class NewsAdapter(private var newsList: MutableList<Articles> = mutableListOf(),
             Picasso.get().load(article.urlToImage).into(binding.imgNew)
 
             binding.arrow.setOnClickListener{
-                onClickListener.invoke(article)
+                onClickListener.invoke(layoutPosition)
             }
     }}
 
