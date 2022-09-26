@@ -3,6 +3,8 @@ package com.tzikin.home.news.view
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.tzikin.core.BaseFragment
 import com.tzikin.core.common.toast
 import com.tzikin.core.helpers.RequestState
@@ -17,8 +19,16 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>() {
 
     private val viewModel: NewsViewModel by viewModels()
 
+    private var adapter = NewsAdapter{
+
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireActivity())
+        binding.recyclerView.adapter = adapter
 
         bindUIService()
     }
@@ -33,7 +43,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>() {
 
                 is RequestState.Success -> {
                     dismissProgressBar()
-                    requireActivity().toast( it.value.status)
+                    adapter.dataHasChanged(it.value.articles)
                 }
 
                 is RequestState.Error -> {

@@ -7,7 +7,7 @@ package com.tzikin.core.repository.home.model
 data class NewsResponse(
     val status: String,
     val totalResults: Int,
-    val articles: List<Articles>
+    val articles: MutableList<Articles>
 )
 
 data class Response(
