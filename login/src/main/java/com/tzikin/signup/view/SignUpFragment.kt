@@ -5,6 +5,8 @@ import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import com.tzikin.core.BaseFragment
+import com.tzikin.core.common.toast
+import com.tzikin.core.helpers.RequestState
 import com.tzikin.login.R
 import com.tzikin.login.databinding.FragmentSignUpBinding
 import com.tzikin.signup.viewmodel.SignUpViewModel
@@ -29,12 +31,27 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
     private fun listeners() {
         binding.confirmButton.onClickListener{
             binding.errorLabel.text = viewModel.getErrorFromInputs()
-
-
             if(viewModel.allValuesCorrect.value == true){
-                viewModel.registerUser()
+                viewModel.registerUser().observe(requireActivity()) {
+                    it?.let {
+                        when(it){
+                            is RequestState.loading -> {
+                                showProgressBar()
+                            }
 
-                navigateTo(R.id.action_signUpFragment_to_loginFragment)
+                            is RequestState.Success -> {
+                                dismissProgressBar()
+                                requireActivity().toast(getString(com.tzikin.core.R.string.txt_user_created))
+                                navigateTo(R.id.action_signUpFragment_to_loginFragment)
+                            }
+
+                            is RequestState.Error -> {
+                                dismissProgressBar()
+                                requireActivity().toast(it.message)
+                            }
+                        }
+                    }
+                }
             }
         }
     }

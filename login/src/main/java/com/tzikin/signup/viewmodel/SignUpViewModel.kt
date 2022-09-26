@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Patterns
 import androidx.lifecycle.*
 import com.google.firebase.auth.FirebaseUser
+import com.tzikin.core.helpers.RequestState
 import com.tzikin.core.repository.login.AuthAppRepository
 import com.tzikin.login.R
 import kotlinx.coroutines.Dispatchers
@@ -15,13 +16,25 @@ class SignUpViewModel(application: Application) : AndroidViewModel(application) 
     private var authAppRepository: AuthAppRepository = AuthAppRepository()
 
 
+    fun registerUser() =
 
-    fun registerUser(){
-        viewModelScope.launch {
-            authAppRepository.registerUser(email = email.value.toString(), password = password.value.toString())
+        liveData(Dispatchers.IO) {
+            emit(RequestState.loading)
+
+            try {
+                emit(
+                    RequestState.Success(
+                        authAppRepository.registerUser(
+                            email = email.value.toString(),
+                            password.value.toString()
+                        )
+                    )
+                )
+            } catch (e: Exception) {
+                emit(RequestState.Error("Network not found!"))
+            }
+
         }
-    }
-
 
     private val _email = MutableLiveData("")
     val email: LiveData<String> = _email
@@ -35,7 +48,7 @@ class SignUpViewModel(application: Application) : AndroidViewModel(application) 
     private val _allValuesCorrect = MutableLiveData(false)
     val allValuesCorrect: LiveData<Boolean> = _allValuesCorrect
 
-    fun setEmail(value: String){
+    fun setEmail(value: String) {
         _email.value = value
     }
 
@@ -43,20 +56,20 @@ class SignUpViewModel(application: Application) : AndroidViewModel(application) 
         _password.value = value
     }
 
-    fun setConfirmationPassword(value: String){
+    fun setConfirmationPassword(value: String) {
         _confirmationPassword.value = value
     }
 
     fun getErrorFromInputs(): String {
-        if(!Patterns.EMAIL_ADDRESS.matcher(email.value.toString()).matches()){
+        if (!Patterns.EMAIL_ADDRESS.matcher(email.value.toString()).matches()) {
             return getApplication<Application?>().getString(com.tzikin.core.R.string.txt_email_error)
         }
 
-        if(password.value?.length!! < 6) {
+        if (password.value?.length!! < 6) {
             return getApplication<Application?>().getString(com.tzikin.core.R.string.txt_password_must_be_6_characters)
         }
 
-        if(password.value != confirmationPassword.value){
+        if (password.value != confirmationPassword.value) {
             return getApplication<Application?>().getString(com.tzikin.core.R.string.txt_password_doesnt_match)
         }
 
