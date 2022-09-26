@@ -24,7 +24,7 @@ class NewsAdapter(private var newsList: MutableList<Articles> = mutableListOf(),
         holder.bind(newsList[position], onClickListener)
     }
 
-    override fun getItemCount() = newsList.size
+    override fun getItemCount() = 50
 
     class ViewHolder(var binding: NewsListLayoutBinding) : RecyclerView.ViewHolder(binding.root){
 

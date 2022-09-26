@@ -2,6 +2,7 @@ package com.tzikin.newsapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.FirebaseApp
 import com.tzikin.core.common.ProgressBar
@@ -23,11 +24,18 @@ class MainActivity : AppCompatActivity(), AppFunctions {
     }
 
     override fun showProgressBar() {
+
+        // binding.animatedIcon.visibility = View.VISIBLE
+
+        /*
         progressBar = ProgressBar()
         progressBar.show(supportFragmentManager, "MyProgressBar")
+
+         */
     }
 
     override fun hideProgressBar() {
-        progressBar.dismiss()
+       // binding.animatedIcon.visibility = View.GONE
+        //progressBar.dismiss()
     }
 }

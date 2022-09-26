@@ -19,13 +19,14 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>() {
 
     private val viewModel: NewsViewModel by activityViewModels()
 
-    private var adapter = NewsAdapter(){
+    private var adapter = NewsAdapter{
         navigateTo(NewsFragmentDirections.actionNewsFragmentToNewPageFragment(it))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireActivity())
         bindUIService()
 
     }
@@ -33,33 +34,31 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>() {
     private fun bindUIService() {
         viewModel.apply {
 
-            if(articles.value.isNullOrEmpty() || articles.value?.isEmpty() == true){
+
                 getNews("android", "2022-09-24", "2022-09-24")
-                requestState.observe(requireActivity()) { it ->
+                requestState.observe(requireActivity()) {
                     when (it) {
                         is RequestState.loading -> {
-                            showProgressBar()
+                         //   showProgressBar()
                         }
 
                         is RequestState.Success -> {
-                            dismissProgressBar()
-
-
-                            binding.recyclerView.layoutManager = LinearLayoutManager(requireActivity())
-                            binding.recyclerView.adapter = adapter
+                           // dismissProgressBar()
 
                             viewModel.setArticles(it.value.articles)
                             adapter.dataHasChanged(it.value.articles)
 
+                            binding.recyclerView.adapter = adapter
+
                         }
 
                         is RequestState.Error -> {
-                            dismissProgressBar()
+                          //  dismissProgressBar()
                             requireActivity().toast(it.message)
                         }
                     }
                 }
-            }
+
         }
     }
 

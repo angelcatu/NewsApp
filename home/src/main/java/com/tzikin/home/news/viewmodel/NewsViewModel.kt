@@ -19,6 +19,7 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
     private var _requestState: MutableLiveData<RequestState<NewsResponse>> = MutableLiveData()
     val requestState: MutableLiveData<RequestState<NewsResponse>> = _requestState
 
+
     private var _articles: MutableLiveData<MutableList<Articles>> = MutableLiveData()
     val articles: LiveData<MutableList<Articles>> = _articles
 
@@ -27,6 +28,7 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             try {
                 _requestState.value = RequestState.loading
+                var request = homeRepository.getAllNews(topic, startDate, endDate)
                 handleResponseStatus(homeRepository.getAllNews(topic, startDate, endDate))
 
             }catch (e: Exception) {
