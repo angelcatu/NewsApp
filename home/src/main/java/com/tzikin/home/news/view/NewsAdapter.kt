@@ -8,6 +8,8 @@ import com.squareup.picasso.Picasso
 import com.tzikin.core.repository.home.model.Articles
 
 import com.tzikin.home.databinding.NewsListLayoutBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * @author Angel Elias on 25/09/22.
@@ -24,15 +26,23 @@ class NewsAdapter(private var newsList: MutableList<Articles> = mutableListOf(),
         holder.bind(newsList[position], onClickListener)
     }
 
-    override fun getItemCount() = 50
+    override fun getItemCount() = newsList.size
 
     class ViewHolder(var binding: NewsListLayoutBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(article: Articles, onClickListener: (Int) -> Unit) {
             binding.txtTitle.text = article.title
             binding.txtDescription.text = article.description
-            binding.txtAuthor.text = article.author
-            binding.txtDate.text = article.publishedAt
+            binding.txtAuthor.text = article.source.name
+
+
+            val date = article.publishedAt
+            val originalFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val finalFormat = SimpleDateFormat("dd-MMMM-yyyy", Locale.getDefault())
+
+            val formatted = originalFormat.parse(date)
+            val result = formatted?.let { finalFormat.format(it) }
+            binding.txtDate.text = result
 
             Picasso.get().load(article.urlToImage).into(binding.imgNew)
 
@@ -45,5 +55,10 @@ class NewsAdapter(private var newsList: MutableList<Articles> = mutableListOf(),
         this.newsList.clear()
         this.newsList.addAll(list)
         notifyItemRangeInserted(0, list.size)
+    }
+
+    fun dataHasInserted(list: MutableList<Articles>) {
+        this.newsList.addAll(list)
+        notifyItemInserted(this.newsList.size - 1)
     }
 }

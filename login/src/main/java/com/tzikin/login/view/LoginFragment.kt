@@ -35,7 +35,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                     }
 
                     is RequestState.Success -> {
-                        homeViewModel.setArticles(mutableListOf())
                         navigateTo(ConstantsDeepLink.HOME_PAGE_DEEP_LINK)
                     }
 

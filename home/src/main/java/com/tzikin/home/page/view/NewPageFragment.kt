@@ -12,6 +12,8 @@ import com.tzikin.home.databinding.FragmentNewPageLayoutBinding
 import com.tzikin.home.databinding.FragmentNewsBinding
 import com.tzikin.home.news.viewmodel.NewsViewModel
 import com.tzikin.home.page.viewmodel.NewPageViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NewPageFragment : BaseFragment<FragmentNewPageLayoutBinding>() {
 
@@ -42,7 +44,15 @@ class NewPageFragment : BaseFragment<FragmentNewPageLayoutBinding>() {
 
         binding.txtPageTitle.text = article?.title
         binding.txtPageContent.text = article?.content
-        binding.txtPageDate.text = article?.publishedAt
+
+        val date = article?.publishedAt
+        val originalFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val finalFormat = SimpleDateFormat("dd-MMMM-yyyy", Locale.getDefault())
+
+        val formatted = originalFormat.parse(date)
+        val result = formatted?.let { finalFormat.format(it) }
+        binding.txtPageDate.text = result
+
         binding.txtPageSource.text = article?.source?.name
         binding.txtPageDescription.text = article?.description
         Picasso.get().load(article?.urlToImage).into(binding.imgPageNew)

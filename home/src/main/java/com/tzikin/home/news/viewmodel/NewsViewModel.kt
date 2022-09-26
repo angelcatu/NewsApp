@@ -1,17 +1,14 @@
 package com.tzikin.home.news.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.google.android.gms.common.api.Api
-import com.tzikin.core.helpers.ApiHandleResult
+import androidx.lifecycle.*
 import com.tzikin.core.helpers.RequestState
 import com.tzikin.core.repository.home.HomeRepository
 import com.tzikin.core.repository.home.model.Articles
 import com.tzikin.core.repository.home.model.NewsResponse
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class NewsViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -25,25 +22,24 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
     val articles: LiveData<MutableList<Articles>>
         get() = _articles
 
-    fun getNews(topic: String, startDate: String, endDate: String) {
+    var loading = false
+    var visibleItemCount: Int = 0
 
-        viewModelScope.launch {
-            try {
-                _requestState.value = RequestState.loading
-                handleResponseStatus(homeRepository.getAllNews(topic, startDate, endDate))
-
-            }catch (e: Exception) {
-                _requestState.value = RequestState.Error("Error en la red")
-            }
-
+    fun getNews(topic: String, startDate: String, endDate: String)
+    = liveData(Dispatchers.IO) {
+        emit(RequestState.loading)
+        try {
+            emit(RequestState.Success(homeRepository.getAllNews(topic, startDate, endDate)))
+        }catch (e: Exception){
+            emit(RequestState.Error("Error en la red"))
         }
     }
 
-    private fun handleResponseStatus(requestState: RequestState<NewsResponse>) {
-        _requestState.value = requestState
+    fun setArticlesList(value: MutableList<Articles>){
+        _articles.value = value
     }
 
-    fun setArticles(value: MutableList<Articles>){
-        _articles.value = value
+    fun addArticlesList(value: MutableList<Articles>) {
+        _articles.value?.addAll(value)
     }
 }

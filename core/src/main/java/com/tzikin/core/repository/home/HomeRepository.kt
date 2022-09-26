@@ -12,9 +12,9 @@ import com.tzikin.core.repository.makeNetworkCall
  **/
 class HomeRepository {
 
-    suspend fun getAllNews(topic: String, startDate: String, endDate: String): RequestState<NewsResponse>
-    = makeNetworkCall {
+    suspend fun getAllNews(topic: String, startDate: String, endDate: String): NewsResponse
+    =
         retrofitService.getNews(topic, startDate, endDate)
-    }
+
 
 }

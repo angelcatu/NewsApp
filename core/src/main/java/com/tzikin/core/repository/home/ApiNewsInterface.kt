@@ -1,6 +1,8 @@
 package com.tzikin.core.repository.home
 
+import com.tzikin.core.helpers.RequestState
 import com.tzikin.core.repository.home.model.NewsResponse
+import org.intellij.lang.annotations.Language
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -18,7 +20,9 @@ interface ApiNewsInterface {
         @Query("q") topic: String,
         @Query("from") startDate: String,
         @Query("to") endDate: String,
-        @Query("sortBy") sortBy: String = "popularity",
+        @Query("pageSize") pageSize: Int = 5,
+        @Query("sortBy") sortBy: String = "publishedAt",
+        @Query("language") language: String = "en",
         @Query("apiKey") apiKey: String = "0c9beae004b1417099ac4ae728f6fbb2"
     ): NewsResponse
 

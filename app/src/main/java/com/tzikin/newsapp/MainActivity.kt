@@ -24,18 +24,11 @@ class MainActivity : AppCompatActivity(), AppFunctions {
     }
 
     override fun showProgressBar() {
-
-         binding.animatedIcon.visibility = View.VISIBLE
-
-        /*
         progressBar = ProgressBar()
         progressBar.show(supportFragmentManager, "MyProgressBar")
-
-         */
     }
 
     override fun hideProgressBar() {
-        binding.animatedIcon.visibility = View.GONE
-        //progressBar.dismiss()
+        progressBar.dismiss()
     }
 }
