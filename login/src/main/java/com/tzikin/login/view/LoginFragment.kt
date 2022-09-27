@@ -27,22 +27,19 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
 
         binding.loginButton.onClickListener {
-            viewModel.login().observe(requireActivity()){
-                it?.let {
-                    when (it) {
-                        is RequestState.Success -> {
-                            dismissProgressBar()
-                            navigateTo(ConstantsDeepLink.HOME_PAGE_DEEP_LINK)
-                        }
+            viewModel.login()
+            viewModel.requestState.observe(requireActivity()){
+                when(it){
+                    is RequestState.loading -> {
 
-                        is RequestState.loading -> {
-                            showProgressBar()
-                        }
+                    }
 
-                        is RequestState.Error -> {
-                            dismissProgressBar()
-                            requireActivity().toast(it.message)
-                        }
+                    is RequestState.Success -> {
+                        navigateTo(ConstantsDeepLink.HOME_PAGE_DEEP_LINK)
+                    }
+
+                    is RequestState.Error -> {
+                        requireActivity().toast(it.message)
                     }
                 }
             }

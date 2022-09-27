@@ -13,7 +13,7 @@ class AuthAppRepository {
 
     private var userLiveData: MutableLiveData<FirebaseUser?> = MutableLiveData()
 
-    private val firebaseAuth: FirebaseAuth by lazy {
+    val firebaseAuth: FirebaseAuth by lazy {
         FirebaseAuth.getInstance()
     }
 
@@ -37,9 +37,9 @@ class AuthAppRepository {
                     requestState.value = RequestState.Success(userLiveData.value)
                 }
             }.addOnFailureListener {
-                requestState.value = RequestState.Error("User not found!")
+                requestState.value = RequestState.Error("User or password incorrect!")
             }
-
         return requestState
+
     }
 }
