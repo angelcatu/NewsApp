@@ -1,5 +1,5 @@
 # NewsApp
-Application for get news applying mvvm architecture and Firebase Auth
+Application for get news applying mvvm and modular architecture with Firebase Auth
 
 ## Architecture
 
